@@ -1,131 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ping Pong</title>
-    <style>
-        #game {
-            position: absolute;
-            width: 1340px;
-            height: 650px;
-            border: 1px solid black;
-        }
-        
-        #paddleA, #paddleB {
-            position: absolute;
-            width: 10px;
-            height: 50px;
-            background-color: black;
-        }
-        
-        #paddleA {
-            left: 0;
-        }
-        
-        #paddleB {
-            right: 0;
-        }
-        
-        #ball {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: red;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ping Pong Game</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 <body>
-<div id="game">
-    <div id="paddleA"></div>
-    <div id="paddleB"></div>
-    <div id="ball"></div>
-</div>
-
-<script>
-    // Definindo variáveis iniciais
-    var paddleA = document.getElementById('paddleA');
-    var paddleB = document.getElementById('paddleB');
-    var pong = document.getElementById('game');
-    var ball = document.getElementById('ball');
-    var ballX = 200;
-    var ballY = 150;
-    var ballSpeedX = -2;
-    var ballSpeedY = -2;
-    var paddleSpeed = 5;
-    var scoreA = 0;
-    var scoreB = 0;
-    
-    // Função de movimento das raquetes
-    function movePaddles(event) {
-        var key = event.keyCode || event.which;
-        
-        if (key === 38 && paddleB.offsetTop > 0) {
-            paddleB.style.top = paddleB.offsetTop - paddleSpeed + 'px';
-        }
-        
-        if (key === 40 && paddleB.offsetTop + paddleB.offsetHeight < pong.offsetHeight) {
-            paddleB.style.top = paddleB.offsetTop + paddleSpeed + 'px';
-        }
-        
-        if (key === 87 && paddleA.offsetTop > 0) {
-            paddleA.style.top = paddleA.offsetTop - paddleSpeed + 'px';
-        }
-        
-        if (key === 83 && paddleA.offsetTop + paddleA.offsetHeight < pong.offsetHeight) {
-            paddleA.style.top = paddleA.offsetTop + paddleSpeed + 'px';
-        }
-    }
-    
-    // Função de movimento da bola
-    function moveBall() {
-        ballX += ballSpeedX;
-        ballY += ballSpeedY;
-        
-        // Colisão com a parede
-        if (ballY >= pong.offsetHeight - ball.offsetHeight || ballY <= 0) {
-            ballSpeedY *= -1;
-        }
-        
-        // Colisão com as raquetes
-        if (ballX <= paddleA.offsetWidth && ballY + ball.offsetHeight >= paddleA.offsetTop && ballY <= paddleA.offsetTop + paddleA.offsetHeight) {
-            ballSpeedX *= -1;
-            scoreA += 1;
-        }
-        
-        if (ballX >= pong.offsetWidth - paddleB.offsetWidth - ball.offsetWidth && ballY + ball.offsetHeight >= paddleB.offsetTop && ballY <= paddleB.offsetTop + paddleB.offsetHeight) {
-            ballSpeedX *= -1;
-            scoreB += 1;
-        }
-        
-        // Verificação de vitória
-        if (scoreA === 5) {
-            alert("Jogador A venceu!");
-            resetGame();
-        }
-        
-        if (scoreB === 5) {
-            alert("Jogador B venceu!");
-            resetGame();
-        }
-        
-        // Atualizando posição da bola
-        ball.style.left = ballX + 'px';
-        ball.style.top = ballY + 'px';
-    }
-    
-    // Função para reiniciar o jogo
-    function resetGame() {
-        ballX = 200;
-        ballY = 150;
-        scoreA = 0;
-        scoreB = 0;
-    }
-    
-    // Definindo o controle de movimento das raquetes
-    document.addEventListener('keydown', movePaddles);
-    
-    // Movendo a bola a cada frame
-    setInterval(moveBall, 10);
-</script>
+    <div id="game">
+        <div id="board">
+            <div class="divider"></div>
+        </div>
+        <div id="paddle-left"></div>
+        <div id="paddle-right"></div>
+        <div id="ball"></div>
+        <div class="paddle_1 paddle"></div> 
+        <div class="paddle_2  paddle"></div> 
+        <h1 class="player_1_score">0</h1> 
+        <h1 class="player_2_score">0</h1> 
+        <h1 class="message"> 
+            aperte para jogar
+        </h1> 
+    </div>
+    <script src="./script.js"></script>
 </body>
 </html>
+ 
